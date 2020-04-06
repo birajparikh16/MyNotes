@@ -9,6 +9,9 @@ MEAT
 Sauages
 
 DAIRY
+Milk
+Egg
+Yoghurt
 
 HOUSEHOLD
 
