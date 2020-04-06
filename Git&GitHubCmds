@@ -1,0 +1,174 @@
+
+# Download Git
+
+# Check Git version
+git --version
+
+# Access Git's helpful documentation
+git --help
+
+# Getting help on a particular command
+git help init
+
+# Congigure Git
+git config --global user.name "YOUR NAME"
+git config --global user.email "YOUR EMAIL" // YOUR EMAIL Address needs to be same as GitHub account
+
+# Set global text editor (examples)
+git config --global core.editor "notepad"
+git config --global core.editor "Atom"
+
+# Create a new text file
+touch test.txt
+
+# Modify the file using the editor
+Atom test.txt
+
+# To check all the setted parameters
+git config --list
+
+## Examples ##
+
+# Make a new directory and change your current directory to the new directory
+mkdir shop
+cd shop
+
+# Track the directory
+git init // Now, we will be able to track the changes that we make in the files in this directory
+
+# Create a file that we want Git to Track
+touch lists.txt
+
+# Oops I made a mistake in the file name while creating the file
+rm lists.txt
+
+# Create a file with a proper name
+touch list.txt
+
+# Check the list in the directory
+ls
+
+# To track the file, we need to use
+git add file name  // The "add" command tells Git to start tracking this particular file
+eg. git add list.txt 
+// Once you execute the above cmd then the file will be in "staging area".
+
+# Now commit the file
+git commit -m "Create shopping list"  // -m = stands for message and explaining why are we commiting this file
+
+# Check the log
+git log // log = tells us the history of commits for this file
+
+# Lets make change to this file now
+git config --global notepad
+notepad list.txt
+
+# Add some items to the list
+eg. list.txt
+Bananas
+Oranges
+Strawberries
+Apples
+
+# Check Git status now
+git status 
+// Git knowns that this file has been changed but it hasn't been told to save a snapshot of this yet.
+
+# To see the changes that we have made in the file "list.txt"
+git diff
+// Git shows the two files 1. old file and 2. modified file
+
+# Now lets commit those changes
+git add list.txt  // "add" cmd is used to stage the file
+git status
+git commit -m "Add fruits"
+
+# Check logs
+git log
+
+# Lets revamp this file and commit again
+notepad list.txt
+git diff  // See changes made vs original file
+git add list.txt
+git commit -m "Restructure list: new headings for different categories of purchase"
+git log
+
+# Get most recent commit 
+git log -1
+
+# Make a new change in the file
+notepad list.txt
+git add list.txt
+
+git diff - No output
+git diff --staged  // This tells us what is the difference between what is in the staged are and our previous commit
+git commit -m "Sausages added to the meat section"
+
+# If we want to check the difference in the commits lets say 2nd commit and current commit then
+git diff 'first8charactersof2ndcommit' list.txt
+
+git checkout HEAD~3 list.txt // It enables you to go back to the older versions of the file 
+notepad list.txt
+
+# Lets say we made some mistake while entering some details in the file and the file has been staged.
+notepad list.txt
+git add list.txt
+git diff --staged
+
+git reset list.txt  // It restores the orginal file
+// Now check the difference
+git diff --staged
+
+# What if the file has already been committed
+git add list.txt
+git commit -m "Added content to dairy section"
+git log
+
+git reset HEAD~1 --soft // soft = It removes that commit but doesn't change what happened in the staging area
+git log
+git status
+git diff --staged // Thus the latest commit has been removed but the changes still persist in the staged area i.e file doesn't change
+
+git reset HEAD~1 --mixed // mixed = removes the commit and also makes the changes unstaged
+git status  // the file is unstaged
+// mixed however doesn't change the file
+
+git reset HEAD~1 --hard // hard = removes the changes we've added to the file.
+
+## Branches ##
+Branches can help you to create a different versions of the file to be developed in parallel.
+
+git branch dairy // create a new branch
+git branch       // see all the branches
+git branch meat  // create a new branch
+
+# Change branch
+git checkout dairy
+notepad list.txt
+eg. Add some items to the dairy and commit
+git add list.txt
+git commit -m "Update Dairy products"
+
+# Merge with the master branch
+git checkout master
+git merge dairy
+
+# Create a new repo in github with gitignore checked
+# copy https link
+# In bash
+
+git remote add origin "github url"
+eg. git remote add origin https://github.com/birajparikh16/MyNotes.git
+
+check info
+git remote -v
+
+# We can push our repository to the remote repository on GitHub
+git push origin master
+
+# Clone a repo
+git clone "githuburl"
+
+Read about 
+git fetch
+git pull
